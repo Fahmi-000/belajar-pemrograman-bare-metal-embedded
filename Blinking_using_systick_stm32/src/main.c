@@ -1,6 +1,7 @@
 #include <libopencm3/stm32/rcc.h>
 #include <libopencm3/stm32/gpio.h>
 #include <libopencm3/cm3/systick.h>
+#include <libopencm3/cm3/vector.h>
 
 
 #define RCCLEDPORT          (RCC_GPIOC)
@@ -11,10 +12,14 @@
 #define CPU_FREQ            (1000)
 #define SYSTICK_FREQ        (2000000)
 
+volatile uint64_t ticks = 0;
 //static void rcc_setup(void) {
     //rcc_clock_setup_pll (&rcc_hsi_configs [RCC_CLOCK_HSI_64MHZ]);
 
 //}
+static void sys_tick_handler(void){
+    ticks ++;
+}
 
 static void gpio_setup (void){
     rcc_periph_clock_enable(RCCLEDPORT);
@@ -23,6 +28,8 @@ static void gpio_setup (void){
 
 static void systick_setup(void){
     systick_set_frequency(CPU_FREQ, SYSTICK_FREQ);
+    systick_counter_enable();
+    systick_interrupt_enable();
 }
 
 static void delay_cycle(uint32_t cycles){
