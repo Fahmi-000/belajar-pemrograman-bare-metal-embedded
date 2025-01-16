@@ -1,16 +1,14 @@
 #include <libopencm3/stm32/rcc.h>
 #include <libopencm3/stm32/gpio.h>
-#include <libopencm3/cm3/systick.h>
-#include <libopencm3/cm3/vector.h>
 
+#include "system.h"
 
 #define RCCLEDPORT          (RCC_GPIOC)
 #define LEDPORT             (GPIOC)
 #define LEDPIN              (GPIO13)
 #define GPIO_MODE_OUTPUT    GPIO_MODE_OUTPUT_2_MHZ
 #define GPIO_PUPD_NONE      GPIO_CNF_OUTPUT_PUSHPULL
-#define CPU_FREQ            (1000)
-#define SYSTICK_FREQ        (2000000)
+
 
 volatile uint64_t ticks = 0;
 //static void rcc_setup(void) {

@@ -21,9 +21,9 @@ static void gpio_setup (void){
     gpio_set_mode(LEDPORT, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, LEDPIN);
 }
 
-static void systick_setup(void){
-    systick_set_frequency(CPU_FREQ, SYSTICK_FREQ);
-}
+//static void systick_setup(void){
+//    systick_set_frequency(CPU_FREQ, SYSTICK_FREQ);
+//}
 
 static void delay_cycle(uint32_t cycles){
     
@@ -37,9 +37,9 @@ int main (void) {
     while (1)
     {
         gpio_clear(LEDPORT,LEDPIN);
-        delay_cycle(750000);
+        delay_cycle(1000000);
         gpio_set(LEDPORT,LEDPIN);
-        delay_cycle(250000);
+        delay_cycle(2000000);
     }
     
     return 0;
